@@ -1,0 +1,33 @@
+version: '3'
+services:
+  app:
+    container_name: server_message
+    image: duy4dev2904/message_server:0.0.1
+    volumes:
+      - ./:/app
+      - /home/node/app/node_modules
+    environment:
+      - PORT=${PORT_HTTP}
+      - MONGO_URI=${MONGO_URL}
+      # - DB_NAME=${DB_NAME}
+
+    restart: always
+    ports:
+      - "5000:5001"
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo 
+    image: mongo 
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27018:27017"
+  node-app:
+    container_name: server_message_mqtt
+    image: jamieanhduc281102/bkres-message-service:latest  
+    networks:
+      - my-network
+    restart: always
+networks:
+  my-network:
