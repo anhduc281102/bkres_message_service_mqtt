@@ -25,7 +25,7 @@ services:
       - "27018:27017"
   node-app:
     container_name: server_message_mqtt
-    image: jamieanhduc281102/bkres-message-service:latest  
+    image: jamieanhduc281102/bkres-message-service:0.0.3
     networks:
       - my-network
     restart: always
